@@ -1,0 +1,55 @@
+# ============================================
+# CONFIGURACIÓN PARA PRODUCCIÓN
+# ============================================
+# IMPORTANTE: Renombre este archivo a .env
+# y configure los valores según su hosting
+# ============================================
+
+APP_NAME="Municipalidad La Yarada Los Palos"
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=https://su-dominio.com
+
+# ============================================
+# BASE DE DATOS (Configurar con datos del hosting)
+# ============================================
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=nombre_base_datos
+DB_USERNAME=usuario_bd
+DB_PASSWORD=contraseña_bd
+
+# ============================================
+# CONFIGURACIÓN DE SISTEMA
+# ============================================
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=public
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+# ============================================
+# CORREO (Opcional - Configurar si necesita)
+# ============================================
+MAIL_MAILER=smtp
+MAIL_HOST=mail.su-dominio.com
+MAIL_PORT=587
+MAIL_USERNAME=noreply@su-dominio.com
+MAIL_PASSWORD=contraseña_correo
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@su-dominio.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# ============================================
+# NO MODIFICAR
+# ============================================
+MEMCACHED_HOST=127.0.0.1
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379

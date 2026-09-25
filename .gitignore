@@ -1,0 +1,82 @@
+# =========================
+# Laravel
+# =========================
+
+/vendor
+/node_modules
+/public/build
+/public/hot
+/storage/*.key
+/storage/app/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Mantener estas carpetas pero ignorar contenido
+!/storage/app/.gitignore
+!/storage/framework/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/storage/logs/.gitignore
+
+# =========================
+# Environment
+# =========================
+
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+
+# =========================
+# Composer
+# =========================
+
+composer.lock
+
+# (⚠️ Opcional)
+# Si es aplicación final, normalmente SÍ se versiona composer.lock
+# Si es paquete/librería, NO se versiona.
+
+# =========================
+# Node / Frontend
+# =========================
+
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+vite.config.js.timestamp-*
+
+# =========================
+# IDEs / Editors
+# =========================
+
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Testing / Coverage
+# =========================
+
+/coverage
+/.phpunit.cache
+
+# =========================
+# Misc
+# =========================
+
+*.log
+*.cache
