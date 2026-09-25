@@ -1,254 +1,126 @@
-# Portal Notarios - Sistema Integral
+# Portal Web
 
-Sistema web completo para el Colegio de Notarios del Perú con intranet, extranet y gestor de contenidos dinámico.
+Aplicación web desarrollada con **Laravel 12**. Este documento explica cómo preparar el entorno e iniciar el proyecto desde cero.
 
-## 🚀 Características Principales
+## Requisitos
 
-### Frontend Público
-- **Diseño moderno** inspirado en notarios.org.pe
-- **Directorio de notarios** con búsqueda y filtros
-- **Catálogo de servicios** notariales
-- **Documentos públicos** disponibles para descarga
-- **Formulario de contacto** integrado
-- **Diseño responsive** para todos los dispositivos
+Antes de comenzar, el equipo debe contar con:
 
-### Panel Administrativo (AdminLTE)
-- **Dashboard completo** con estadísticas
-- **Gestión de notarios** con DataTables
-- **Gestión de documentos** con subida de archivos
-- **Gestión de servicios** notariales
-- **Sistema de usuarios** con roles y permisos
-- **Gestión de categorías** de documentos
-- **Mensajes de contacto** del sitio público
+- **Git** 2.0 o superior.
+- **PHP** 8.2 o superior.
+- **Composer** 2.x.
+- **Node.js** 20 o superior.
+- **npm** 10 o superior.
+- **MySQL** 8.0 o superior, con una base de datos disponible para la aplicación.
 
-### Sistema de Roles
-- **Administrador**: Acceso completo al sistema
-- **Notario**: Gestión de sus documentos y servicios
-- **Cliente**: Acceso a documentos públicos y servicios
+PHP debe tener habilitadas las extensiones necesarias para Laravel y MySQL, entre ellas:
 
-### Funcionalidades Técnicas
-- **Base de datos MySQL** optimizada
-- **Autenticación Laravel** con roles (Spatie Permission)
-- **DataTables** para gestión de datos
-- **Subida de archivos** con validación
-- **Sistema de permisos** granular
-- **Logs de actividad** (Spatie Activity Log)
-- **Backup automático** (Spatie Backup)
-
-## 📋 Requisitos del Sistema
-
-- PHP 8.1 o superior
-- MySQL 5.7 o superior
-- Composer
-- Node.js y NPM (para assets)
-- Servidor web (Apache/Nginx)
-
-## 🛠️ Instalación
-
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/tu-usuario/portal-notarios.git
-cd portal-notarios
+```text
+ctype, curl, dom, fileinfo, mbstring, openssl, PDO, pdo_mysql, tokenizer y xml
 ```
 
-### 2. Instalar dependencias
+## Instalación
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/jonas0910/portal_web.git
+cd portal_web
+```
+
+### 2. Instalar las dependencias
+
 ```bash
 composer install
 npm install
 ```
 
-### 3. Configurar entorno
+Estos comandos instalan las dependencias de PHP y del frontend utilizando los archivos de bloqueo incluidos en el repositorio.
+
+### 3. Crear el archivo de entorno
+
 ```bash
 cp env.example .env
 php artisan key:generate
 ```
 
-### 4. Configurar base de datos
-Editar el archivo `.env` con los datos de tu base de datos:
+### 4. Configurar la conexión a la base de datos
+
+Editar el archivo `.env` y completar los valores correspondientes al entorno local:
+
 ```env
+APP_NAME="Portal Web"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=cnotarios
+DB_DATABASE=portal_web
 DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
 ```
 
-### 5. Ejecutar migraciones y seeders
-```bash
-php artisan migrate --seed
-```
+La base de datos indicada debe estar creada, disponible y accesible con las credenciales configuradas.
 
-### 6. Compilar assets
-```bash
-npm run dev
-# o para producción
-npm run build
-```
+### 5. Preparar el almacenamiento
 
-### 7. Configurar almacenamiento
 ```bash
 php artisan storage:link
 ```
 
-## 👥 Usuarios por Defecto
+En Linux, si el servidor no tiene permisos suficientes, puede ser necesario ejecutarlo con `sudo` o corregir los permisos de las carpetas `storage` y `bootstrap/cache`.
 
-Después de ejecutar los seeders, tendrás estos usuarios:
+### 6. Compilar los recursos del frontend
 
-### Administrador
-- **Email**: admin@notarios.org.pe
-- **Password**: password
-- **Rol**: Administrador completo
+Para generar los archivos estáticos:
 
-### Notarios de Ejemplo
-- **Email**: carlos.mendoza@notarios.org.pe
-- **Password**: password
-- **Rol**: Notario
-
-- **Email**: maria.rodriguez@notarios.org.pe
-- **Password**: password
-- **Rol**: Notario
-
-## 🗂️ Estructura del Proyecto
-
-```
-app/
-├── Http/Controllers/
-│   ├── Admin/          # Controladores del panel admin
-│   ├── Notario/        # Controladores para notarios
-│   ├── Cliente/        # Controladores para clientes
-│   └── PublicController.php
-├── Models/
-│   ├── Notario.php
-│   ├── Documento.php
-│   ├── Servicio.php
-│   ├── CategoriaDocumento.php
-│   └── User.php
-└── ...
-
-database/
-├── migrations/         # Migraciones de base de datos
-└── seeders/           # Datos iniciales
-
-resources/
-├── views/
-│   ├── admin/         # Vistas del panel administrativo
-│   ├── public/        # Vistas del sitio público
-│   └── layouts/       # Layouts base
-└── ...
-
-routes/
-└── web.php           # Rutas del sistema
+```bash
+npm run build
 ```
 
-## 🔧 Configuración Adicional
+Este comando es necesario cuando la aplicación se ejecutará sin el servidor de desarrollo de Vite.
 
-### AdminLTE
-El panel administrativo usa AdminLTE 3. La configuración se encuentra en:
-- `config/adminlte.php`
-- `config/adminlte_menu.php`
+## Iniciar la aplicación
 
-### Permisos y Roles
-Los permisos se definen en `database/seeders/RolesAndPermissionsSeeder.php`
+### Modo de desarrollo
 
-### DataTables
-Las tablas dinámicas están configuradas en los controladores Admin con:
-- Procesamiento del lado del servidor
-- Búsqueda y filtrado
-- Paginación automática
-- Exportación de datos
+Ejecutar `npm run dev` en una terminal:
 
-## 📱 Funcionalidades por Módulo
-
-### Módulo de Notarios
-- Registro completo de datos profesionales
-- Gestión de especialidades
-- Subida de fotos profesionales
-- Estados activo/inactivo
-- Asociación con usuarios del sistema
-
-### Módulo de Documentos
-- Subida de archivos (PDF, DOC, DOCX)
-- Categorización por tipo
-- Control de visibilidad (público/privado)
-- Sistema de tags
-- Metadatos completos
-
-### Módulo de Servicios
-- Catálogo de servicios notariales
-- Precios y duración
-- Requisitos y procedimientos
-- Asociación con notarios
-- Estados activo/inactivo
-
-### Módulo de Contacto
-- Formulario público integrado
-- Gestión de mensajes en el admin
-- Sistema de respuestas
-- Estados de lectura
-
-## 🎨 Personalización
-
-### Colores del Tema
-Los colores principales se definen en CSS variables:
-```css
-:root {
-    --primary-color: #1e3a8a;
-    --secondary-color: #f59e0b;
-    --accent-color: #dc2626;
-}
+```bash
+npm run dev
 ```
 
-### Logo y Branding
-- Cambiar logo en `resources/views/layouts/public.blade.php`
-- Configurar colores en las variables CSS
-- Personalizar AdminLTE en `config/adminlte.php`
+Luego, en una segunda terminal, iniciar Laravel:
 
-## 🔒 Seguridad
+```bash
+php artisan serve
+```
 
-- Autenticación Laravel con hash de contraseñas
-- Middleware de roles y permisos
-- Validación de archivos subidos
-- Protección CSRF en formularios
-- Sanitización de datos de entrada
+La aplicación estará disponible en:
 
-## 📊 Monitoreo y Logs
+```text
+http://localhost:8000
+```
 
-- Logs de actividad con Spatie Activity Log
-- Backup automático con Spatie Backup
-- Logs de Laravel en `storage/logs/`
+El comando `npm run dev` debe permanecer activo para recompilar automáticamente los archivos del frontend.
 
-## 🚀 Despliegue
+### Con recursos compilados
 
-### Producción
-1. Configurar variables de entorno de producción
-2. Ejecutar `php artisan config:cache`
-3. Ejecutar `php artisan route:cache`
-4. Ejecutar `php artisan view:cache`
-5. Compilar assets con `npm run build`
+Si se ejecutó previamente `npm run build`, solo es necesario iniciar Laravel:
 
-### Servidor Web
-Configurar el servidor web para apuntar al directorio `public/`
+```bash
+php artisan serve
+```
 
-## 🤝 Contribución
+## Comandos principales
 
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
-## 📞 Soporte
-
-Para soporte técnico o consultas:
-- Email: soporte@notarios.org.pe
-- Documentación: [Wiki del proyecto]
-- Issues: [GitHub Issues]
-
----
-
-**Portal Notarios** - Sistema integral para el Colegio de Notarios del Perú
+```bash
+composer install     # Instala las dependencias de PHP
+npm install          # Instala las dependencias del frontend
+npm run dev          # Inicia Vite para desarrollo
+npm run build        # Compila los recursos para uso final
+php artisan serve    # Inicia el servidor local de Laravel
+php artisan storage:link # Crea el enlace público de almacenamiento
+```
